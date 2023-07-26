@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors } from '../../../utility/colors';
 
 export const styles = StyleSheet.create({
-  container:{
+  container: {
     padding: 24,
-    flexDirection:'column',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%'
@@ -13,21 +13,25 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 200,
   },
-  titleContainer:{
+  titleContainer: {
     marginVertical: 54
   },
-  title:{
+  title: {
     fontSize: 40,
     fontWeight: 'bold',
     color: colors.primaryBlack,
     textAlign: 'center'
   },
-  innerTitle:{
+  buttonContainer: {
+    flexDirection: 'row',
+    width: '100%'
+  },
+  innerTitle: {
     color: colors.orange,
     textDecorationLine: 'underline',
     fontSize: 40
   },
-  signInText:{
+  signInText: {
     color: colors.blue,
     textAlign: 'center',
     fontSize: 16,

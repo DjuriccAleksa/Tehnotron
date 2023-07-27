@@ -7,8 +7,24 @@ import Profile from '../app/Profile';
 import Favorites from '../app/Favorites';
 
 import { colors } from "../../utility/colors";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Settings from "../app/Settings";
+import CreateListing from "../app/CreateListing";
+import MyListings from "../app/MyListings";
 
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const ProfileStack = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }} />
+            <Stack.Screen name="Settings" component={Settings} options={{ headerShown: false }} />
+            <Stack.Screen name="CreateListing" component={CreateListing} options={{ headerShown: false }} />
+            <Stack.Screen name="MyListings" component={MyListings} options={{ headerShown: false }} />
+        </Stack.Navigator>
+    )
+}
 
 const Tabs = () => {
     return (
@@ -26,7 +42,7 @@ const Tabs = () => {
                         require('../../resources/TabIcons/favorites_active.png') :
                         require('../../resources/TabIcons/favorites.png');
                 }
-                else if (route.name === "Profile") {
+                else if (route.name === "ProfileStack") {
                     icon = focused ?
                         require('../../resources/TabIcons/profile_active.png') :
                         require('../../resources/TabIcons/profile.png');
@@ -40,7 +56,7 @@ const Tabs = () => {
         })}>
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Favorites" component={Favorites} />
-            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen name="ProfileStack" component={ProfileStack} />
         </Tab.Navigator >
     )
 }

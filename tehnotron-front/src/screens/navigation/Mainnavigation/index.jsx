@@ -9,8 +9,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { colors } from '../../../utility/colors';
 import ProductDetails from '../../../screens/app/ProductDetails';
 import { UserContext } from '../../../../App';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { addToxenToRequest } from '../../../utility/request';
+import { getItem } from '../../../utility/storageCalls';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,12 +20,19 @@ const Routes = () => {
 
     useEffect(() => {
         (async () => {
-            const token = await AsyncStorage.getItem('auth_token');
-            setUser({ token });
+            // const token = await AsyncStorage.getItem('auth_token');
+            const token = await getItem('token');
+
+            if (token == null) {
+                setUser({});
+            }
+            else {
+                setUser({ token });
+            }
 
             setTimeout(() => {
                 setLoading(false);
-            }, 200);
+            }, 1000);
         })()
     }, [])
 

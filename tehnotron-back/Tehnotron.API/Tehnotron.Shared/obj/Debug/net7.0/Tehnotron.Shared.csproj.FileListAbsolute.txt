@@ -1,0 +1,12 @@
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\bin\Debug\net7.0\Tehnotron.Shared.deps.json
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\bin\Debug\net7.0\Tehnotron.Shared.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\bin\Debug\net7.0\Tehnotron.Shared.pdb
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\Tehnotron.Shared.csproj.AssemblyReference.cache
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\Tehnotron.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\Tehnotron.Shared.AssemblyInfoInputs.cache
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\Tehnotron.Shared.AssemblyInfo.cs
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\Tehnotron.Shared.csproj.CoreCompileInputs.cache
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\Tehnotron.Shared.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\refint\Tehnotron.Shared.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\Tehnotron.Shared.pdb
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Shared\obj\Debug\net7.0\ref\Tehnotron.Shared.dll

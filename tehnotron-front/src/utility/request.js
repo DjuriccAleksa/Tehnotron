@@ -6,10 +6,12 @@ export const request = ({ url, method, data, headers }) => {
         method: method || 'get',
         url: `${API_BASE_URL}${url}`,
         data,
-        headers
+        headers: {
+            ...headers
+        }
     });
 }
 
 export const addToxenToRequest = (token) => {
-    axios.defaults.headers.Authorization = token;
+    axios.defaults.headers.Authorization = `Bearer ${token}`;
 }

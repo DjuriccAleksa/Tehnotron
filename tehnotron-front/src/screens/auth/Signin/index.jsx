@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { styles } from './style'
 import AuthHeader from '../../../components/AuthHeader';
-import { Text, ScrollView, Alert } from 'react-native';
+import { Text, ScrollView, Alert, TextInput } from 'react-native';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button'
 import Separator from '../../../components/Separator';
@@ -11,9 +11,9 @@ import { UserContext } from '../../../../App';
 import { signIn } from '../../../utility/apiCalls';
 
 const Signin = ({ navigation }) => {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({ UserName: '', Password: '' });
   const { setUser } = useContext(UserContext);
-
+  console.log(values);
   const onSignUp = () => {
     navigation.navigate('Signup');
   }
@@ -29,11 +29,11 @@ const Signin = ({ navigation }) => {
   const onSubimt = async () => {
     try {
 
-      if (!values?.email) {
-        Alert.alert('Email cant be empty');
+      if (!values?.UserName) {
+        Alert.alert('Username cant be empty');
         return;
       }
-      if (!values?.password) {
+      if (!values?.Password) {
         Alert.alert('Password cant be empty');
         return;
       }
@@ -50,8 +50,8 @@ const Signin = ({ navigation }) => {
       <ScrollView style={styles.container}>
         <AuthHeader onBackPress={onBack} title={"Sign In"} />
 
-        <Input value={values.email} onChangeText={(v) => onChange('email', v)} label="Email" placeholder="email@gmail.com" containerMargin={{ marginBottom: 20 }} />
-        <Input value={values.password} onChangeText={(v) => onChange('password', v)} label="Password" placeholder="*****" isPassword containerMargin={{ marginBottom: 20 }} />
+        <Input name="UserName" value={values.UserName} onEndEditing={onChange} label="Username" placeholder="username" containerMargin={{ marginBottom: 20 }} />
+        <Input name="Password" value={values.Password} onEndEditing={onChange} label="Password" placeholder="*****" isPassword containerMargin={{ marginBottom: 20 }} />
 
         <Button onPress={onSubimt} style={styles.button} title="Sign In" />
 

@@ -22,5 +22,17 @@ export const styles = StyleSheet.create({
     },
     placeholder: {
         width: 24
+    },
+    inputContainer: {
+        borderWidth: 1,
+        borderColor: colors.grey,
+        borderRadius: 14,
+        marginTop: 24,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    input: {
+        padding: 16,
+        flex: 1
     }
 })

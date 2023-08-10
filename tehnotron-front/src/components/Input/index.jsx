@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Image, Pressable, Text, TextInput, View, Modal, TouchableOpacity } from "react-native";
 import { styles } from './style'
 
-const Input = ({ label, type, placeholder, isPassword, containerMargin, value, onChangeText, options, style, ...props }) => {
+const Input = ({ label, type, placeholder, isPassword, containerMargin, value, onEndEditing, onChangeText, name, options, style, ...props }) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isPickerModalVisible, setPickerModalVisible] = useState(false);
 
@@ -19,7 +19,8 @@ const Input = ({ label, type, placeholder, isPassword, containerMargin, value, o
         return (
             <Pressable onPress={() => setPickerModalVisible(true)} style={styles.inputContainer}>
                 {value ? (
-                    <Text style={[styles.input, style]}>{value?.title}</Text>
+                    <Text style={[styles.input, style]}>{value?.name}</Text>
+
                 ) : (
                     <Text style={[styles.placeholder, style]}>{placeholder}</Text>
                 )}
@@ -30,8 +31,14 @@ const Input = ({ label, type, placeholder, isPassword, containerMargin, value, o
     }
 
     const RenderInput = () => {
+        const [text, setText] = useState(value);
+
+        const handleBlur = () => {
+            onEndEditing(name, text);
+        };
+
         return (<View style={styles.inputContainer}>
-            <TextInput value={value} onChangeText={onChangeText} secureTextEntry={isPassword && !isPasswordVisible} style={[styles.input, style]} placeholder={placeholder} {...props} />
+            <TextInput value={text} onChangeText={setText} onBlur={handleBlur} defaultValue={text} secureTextEntry={isPassword && !isPasswordVisible} style={[styles.input, style]} placeholder={placeholder} {...props} />
 
             {
                 isPassword ?
@@ -53,14 +60,13 @@ const Input = ({ label, type, placeholder, isPassword, containerMargin, value, o
                         <Text style={styles.headerTitle}>Select options</Text>
 
                         {options?.map(opt => {
-                            if (!opt?.id) {
+                            if (opt?.name == "All") {
                                 return null;
                             }
 
                             const selected = value?.id === opt?.id;
-
                             return (
-                                <Text onPress={() => onSelect(opt)} style={[styles.optionText, selected ? styles.selectedOption : {}]} key={opt?.title}>{opt?.title}</Text>
+                                <Text onPress={() => onSelect(opt)} style={[styles.optionText, selected ? styles.selectedOption : {}]} key={opt?.name}>{opt?.name}</Text>
                             )
                         })}
 

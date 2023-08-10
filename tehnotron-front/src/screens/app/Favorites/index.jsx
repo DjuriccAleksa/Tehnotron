@@ -1,14 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Alert, FlatList, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FavoriteItem from "../../../components/FavoriteItem"
 import Header from "../../../components/Header";
-import { ServicesContext } from "../../../../App";
-import { updateService } from "../../../utility/apiCalls";
+import { FavoritesContext, ProfileContext } from "../../../../App";
+import { deleteFavorite, getFavorites, } from "../../../utility/apiCalls";
 
 const Favorites = ({ navigation }) => {
-    const { services, setServices } = useContext(ServicesContext);
-    const likedServices = Array.isArray(services) ? services?.filter(service => service?.liked) : [];
+    const { favorites, setFavorites } = useContext(FavoritesContext);
+    const { profile } = useContext(ProfileContext);
+
+    useState(() => {
+        (async () => {
+            const favProducts = await getFavorites(profile?.id);
+            setFavorites(favProducts);
+        })()
+    }, [])
 
     const renderItem = ({ item }) => {
         const onProductPress = () => {
@@ -16,10 +23,8 @@ const Favorites = ({ navigation }) => {
         }
 
         const onRemove = async () => {
-            const updatedServices = await updateService(item?._id, { liked: false });
-            if (Array.isArray(updatedServices)) {
-                setServices(updatedServices);
-            }
+            const updatedProducts = await deleteFavorite(profile?.id, item?.id);
+            setFavorites(updatedProducts);
         }
 
         const onDeletePress = () => {
@@ -33,7 +38,7 @@ const Favorites = ({ navigation }) => {
     return (
         <SafeAreaView>
             <Header title="Favorites" />
-            <FlatList ListEmptyComponent={(<Text style={{ textAlign: 'center', marginTop: 40 }}>Your list of favorites is empty</Text>)} data={likedServices} renderItem={renderItem} keyExtractor={(item) => String(item?._id)} />
+            <FlatList ListEmptyComponent={(<Text style={{ textAlign: 'center', marginTop: 40 }}>Your list of favorites is empty</Text>)} data={favorites} renderItem={renderItem} keyExtractor={(item) => String(item?.id)} />
         </SafeAreaView>
     )
 }

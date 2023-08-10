@@ -1,20 +1,28 @@
-import React, { useContext, useState } from 'react';
-import { ActivityIndicator, Image, KeyboardAvoidingView, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, Image, KeyboardAvoidingView, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './style';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../../components/Header';
 import { launchImageLibrary } from 'react-native-image-picker';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
-import { categories } from '../../../data/categories';
-import { addService } from '../../../utility/apiCalls';
-import { ServicesContext } from '../../../../App';
+import { addProduct, getCategories } from '../../../utility/apiCalls';
+import { CategoryContext, ProductContext, ProfileContext } from '../../../../App';
 
 const CreateListing = ({ navigation }) => {
     const [images, setImages] = useState([]);
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState({
+        Title: '',
+        CategoryId: '',
+        Price: '',
+        Description: ''
+    });
+
     const [loading, setLoading] = useState(false);
-    const { services, setServices } = useContext(ServicesContext);
+    const { products, setProducts } = useContext(ProductContext);
+    const { categories } = useContext(CategoryContext);
+    const { profile } = useContext(ProfileContext);
+
 
     const goBack = () => {
         navigation.goBack();
@@ -24,7 +32,7 @@ const CreateListing = ({ navigation }) => {
         setLoading(true);
         const result = await launchImageLibrary();
 
-        if (result?.assets?.length) {
+        if (result?.assets) {
             setImages(list => ([...list, ...result?.assets]));
         }
 
@@ -38,30 +46,25 @@ const CreateListing = ({ navigation }) => {
         });
     }
 
-    const onChange = (value, key) => {
+    const onChange = (key, value) => {
         setValues((val) => ({ ...val, [key]: value }));
     }
 
     const onSubmit = async () => {
         const img = images?.length ? images[0] : null;
-        const data = { ...values, category: values.category?.id };
 
-        if (img) {
-            data['image'] = {
-                uri: img?.uri,
-                name: img?.fileName,
-                type: img?.type
-            }
+        if (img === null) {
+            Alert.alert("You have to upload atleast one image");
+            return;
         }
 
-        console.log(data);
+        const data = { ...values, CategoryId: values.CategoryId?.id, UserId: profile?.id };
 
+        const createdProducts = await addProduct(data, images);
 
-        const createdServices = await addService(data);
-
-        setServices(createdServices);
+        setProducts(createdProducts);
         setValues({});
-        navigation.navigate('MyListings')
+        navigation.navigate('MyListings');
     }
 
     return (
@@ -93,10 +96,10 @@ const CreateListing = ({ navigation }) => {
                         ) : null}
                     </View>
 
-                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Listing Title" label="Title" value={values.title} onChangeText={(v) => onChange(v, 'title')} />
-                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Select the category" label="Category" value={values.category} onChangeText={(v) => onChange(v, 'category')} type="picker" options={categories} />
-                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Enter price in RSD" label="Price" value={values.price} onChangeText={(v) => onChange(v, 'price')} keyboardType="numeric" />
-                    <Input containerMargin={{ marginBottom: 20 }} style={styles.textarea} placeholder="Tell us more..." label="Description" value={values.description} onChangeText={(v) => onChange(v, 'description')} multiline />
+                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Listing Title" label="Title" name="Title" value={values.Title} onEndEditing={onChange} />
+                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Select the category" label="Category" name="CategoryId" value={values.CategoryId} onChangeText={(v) => onChange('CategoryId', v)} type="picker" options={categories} />
+                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Enter price in RSD" label="Price" name="Price" value={values.Price} onEndEditing={onChange} keyboardType="numeric" />
+                    <Input containerMargin={{ marginBottom: 20 }} style={styles.textarea} placeholder="Tell us more..." label="Description" name="Description" value={values.Description} onEndEditing={onChange} multiline />
 
                 </KeyboardAvoidingView>
                 <Button onPress={onSubmit} title="Submit" style={styles.button} />

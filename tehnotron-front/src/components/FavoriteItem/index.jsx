@@ -3,10 +3,10 @@ import { Pressable, Text, View, Image } from 'react-native';
 import { styles } from './style';
 import { API_BASE_URL } from '../../../env';
 
-const FavoriteItem = ({ title, price, icon, image, onPress, onDeletePress }) => {
+const FavoriteItem = ({ title, price, icon, thumbnailImage, onPress, onDeletePress }) => {
     return (
         <Pressable onPress={onPress} style={styles.container}>
-            <Image style={styles.image} source={{ uri: `${API_BASE_URL}${image?.path}` }} />
+            <Image style={styles.image} source={{ uri: `${thumbnailImage}` }} />
             <View style={styles.content}>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.price}>{price}</Text>

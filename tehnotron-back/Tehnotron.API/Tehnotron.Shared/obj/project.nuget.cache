@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "82onwyp/MfCDin3ukJ//2TMYdp9a1c0Y+IRbJoU8Hr7oAyzb+HRiMjV7L/JXeBL3B5CPWY14sr4k+TSegiF0uw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Shared\\Tehnotron.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\aleksa.djuric\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Users\\aleksa.djuric\\.nuget\\packages\\microsoft.extensions.primitives\\2.2.0\\microsoft.extensions.primitives.2.2.0.nupkg.sha512",
+    "C:\\Users\\aleksa.djuric\\.nuget\\packages\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
+    "C:\\Users\\aleksa.djuric\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.1\\system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512"
+  ],
+  "logs": []
+}

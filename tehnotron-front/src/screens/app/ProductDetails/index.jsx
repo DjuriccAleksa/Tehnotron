@@ -1,17 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView, Text, Image, View, Pressable, Linking } from 'react-native';
 import { styles } from './style';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from '../../../components/Button';
 import ImageCarousel from '../../../components/ImageCarousel';
 import { API_BASE_URL } from '../../../../env';
-import { updateService } from '../../../utility/apiCalls';
-import { ServicesContext } from '../../../../App';
+import { addFavorite, deleteFavorite, isProductFavorite } from '../../../utility/apiCalls';
+import { FavoritesContext, ProductContext, ProfileContext } from '../../../../App';
 
 const ProductDetails = ({ route, navigation }) => {
     const params = route?.params || {};
-    const { services, setServices } = useContext(ServicesContext);
-    const product = services.find(service => service?._id === params?.product?._id);
+
+    const { products, setProducts } = useContext(ProductContext);
+    const { profile } = useContext(ProfileContext);
+    const { setFavorites } = useContext(FavoritesContext);
+    const [productLiked, setProductLiked] = useState();
+
+    const product = products.find(product => product?.id === params?.product?.id);
+
+    useEffect(() => {
+        (async () => {
+            const isLiked = await isProductFavorite(profile?.id, product?.id);
+            setProductLiked(isLiked);
+        })()
+    }, []);
+
     const onBackPress = () => {
         navigation.goBack();
     }
@@ -27,9 +40,14 @@ const ProductDetails = ({ route, navigation }) => {
     }
 
     const onBookmark = async () => {
-        const data = await updateService(product?._id, { liked: true })
+        let updatedProducts = [];
+        if (productLiked)
+            updatedProducts = await deleteFavorite(profile?.id, product?.id)
+        else
+            updatedProducts = await addFavorite(profile?.id, product?.id);
 
-        setServices(data);
+        setProductLiked((prev) => !prev);
+        setFavorites(updatedProducts);
     }
 
     return (
@@ -38,7 +56,7 @@ const ProductDetails = ({ route, navigation }) => {
                 {product?.images?.length ? (
                     <ImageCarousel images={product?.images} />
                 ) : (
-                    <Image style={styles.image} source={{ uri: `${API_BASE_URL}${product?.image?.path}` }} />
+                    <Image style={styles.image} source={{ uri: `${product?.thumbnailImage}` }} />
                 )}
                 <View style={styles.content}>
                     <Text style={styles.title}>{product?.title}</Text>
@@ -53,7 +71,7 @@ const ProductDetails = ({ route, navigation }) => {
 
             <View style={styles.footer}>
                 <Pressable onPress={onBookmark} style={styles.bookmarkContainer}>
-                    <Image style={styles.bookmarkIcon} source={product?.liked ?
+                    <Image style={styles.bookmarkIcon} source={productLiked ?
                         require('../../../resources/TabIcons/favorites_active.png') :
                         require('../../../resources/TabIcons/favorites.png')} />
                 </Pressable>

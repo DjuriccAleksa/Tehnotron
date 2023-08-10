@@ -12,6 +12,11 @@ export const styles = StyleSheet.create({
         color: colors.black,
         marginBottom: 12,
     },
+    username: {
+        fontSize: 16,
+        color: colors.grey,
+        marginBottom: 12
+    },
     email: {
         fontSize: 14,
         color: colors.grey,

@@ -1,0 +1,17 @@
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\bin\Debug\net7.0\Tehnotron.Repository.deps.json
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\bin\Debug\net7.0\Tehnotron.Repository.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\bin\Debug\net7.0\Tehnotron.Repository.pdb
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\bin\Debug\net7.0\Tehnotron.Entities.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\bin\Debug\net7.0\Tehnotron.Entities.pdb
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.csproj.AssemblyReference.cache
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.AssemblyInfoInputs.cache
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.AssemblyInfo.cs
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.csproj.CoreCompileInputs.cache
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.csproj.CopyComplete
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\refint\Tehnotron.Repository.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\Tehnotron.Repository.pdb
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\obj\Debug\net7.0\ref\Tehnotron.Repository.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\bin\Debug\net7.0\Tehnotron.Interfaces.dll
+C:\Users\aleksa.djuric\Desktop\Tehnotron\tehnotron-back\Tehnotron.API\Tehnotron.Repository\bin\Debug\net7.0\Tehnotron.Interfaces.pdb

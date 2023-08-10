@@ -1,16 +1,21 @@
-import React, { useContext } from 'react';
-import { Alert, FlatList } from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import { Alert, FlatList, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { products } from '../../../data/products';
 import FavoriteItem from '../../../components/FavoriteItem';
 import Header from '../../../components/Header';
-import { ProfileContext, ServicesContext } from '../../../../App';
-import { deleteService } from '../../../utility/apiCalls';
+import { ProfileContext } from '../../../../App';
+import { deleteProduct, getMyListingProducts } from '../../../utility/apiCalls';
 
 const MyListings = ({ navigation }) => {
-    const { services, setServices } = useContext(ServicesContext);
+    const [myProducts, setMyProducts] = useState([]);
     const { profile } = useContext(ProfileContext);
-    const myServices = Array.isArray(services) ? services?.filter(service => service?.owner === profile?._id) : [];
+
+    useEffect(() => {
+        (async () => {
+            const products = await getMyListingProducts(profile?.id);
+            setMyProducts(products);
+        })()
+    }, [])
 
     const renderItem = ({ item }) => {
         const onProductPress = () => {
@@ -18,9 +23,8 @@ const MyListings = ({ navigation }) => {
         }
 
         const onRemove = async () => {
-            const updatedServices = await deleteService(item?._id,);
-            setServices(updatedServices);
-
+            const updatedProducts = await deleteProduct(item?.id, profile?.id);
+            setMyProducts(updatedProducts);
         }
 
         const onDeletePress = () => {
@@ -38,7 +42,7 @@ const MyListings = ({ navigation }) => {
         <SafeAreaView>
             <Header title="My Listings" showBack onBackPress={goBack} />
 
-            <FlatList data={myServices} renderItem={renderItem} keyExtractor={(item) => String(item?._id)} />
+            <FlatList ListEmptyComponent={(<Text style={{ textAlign: 'center', marginTop: 40 }}>You don't have published product currently.</Text>)} data={myProducts} renderItem={renderItem} keyExtractor={(item) => String(item?.id)} />
         </SafeAreaView>
     )
 }

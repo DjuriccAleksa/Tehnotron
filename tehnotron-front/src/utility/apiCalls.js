@@ -1,45 +1,52 @@
+import { Alert } from 'react-native';
 import { request } from './request'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setItem } from './storageCalls';
 
 export const signUp = async (values) => {
     try {
         const response = await request({
-            url: 'user/register',
+            url: 'users',
             method: 'post',
             data: values
         });
-
         if (response)
             return true;
     }
     catch (e) {
-        console.log('e >> ', e)
+        const errors = Object.entries(e.response.data);
+        errors.forEach(([key, value]) => {
+            Alert.alert(`${key}:${value}`);
+        })
     }
 }
 
 export const signIn = async (values) => {
     try {
         const response = await request({
-            url: 'user/login',
+            url: 'users/login',
             method: 'post',
             data: values
         });
 
         if (response?.data?.token) {
-            await AsyncStorage.setItem('auth_token', response?.data?.token);
+            // await AsyncStorage.setItem('auth_token', response?.data?.token);
+            await setItem('token', response?.data?.token, 40);
             return response?.data?.token;
         }
     }
     catch (e) {
-        console.log('e >> ', e)
+        Alert.alert("Wrong Username or Password");
     }
 }
 
-export const getUserProfile = async () => {
+export const getUserProfile = async (id) => {
     try {
         const response = await request({
-            url: 'user/profile',
+            url: `users/${id}`,
             method: 'get',
+            data: {
+                userId: id
+            }
         });
 
         if (response) {
@@ -47,32 +54,35 @@ export const getUserProfile = async () => {
         }
     }
     catch (e) {
-        console.log('e >> ', e)
+        console.log('e profileeeee>> ', e)
     }
 }
 
-export const updateProfile = async (data) => {
+export const updateProfile = async (id, data) => {
     try {
         const response = await request({
-            url: 'user/profile',
-            method: 'patch',
-            data
+            url: `users/${id}`,
+            method: 'put',
+            data: {
+                userId: id,
+                ...data
+            }
         });
 
         if (response) {
-            const profile = await getUserProfile();
+            const profile = await getUserProfile(id);
             return profile;
         }
     }
     catch (e) {
-        console.log('e >> ', e)
+        console.log('e update settings>> ', e)
     }
 }
 
-export const getServices = async () => {
+export const getProducts = async () => {
     try {
         const response = await request({
-            url: 'services',
+            url: 'products',
             method: 'get',
         });
 
@@ -81,24 +91,55 @@ export const getServices = async () => {
         }
     }
     catch (e) {
-        console.log('e ser>> ', e)
+        console.log('e products>> ', e)
     }
 }
 
-export const updateService = async (id, data) => {
+export const getCategories = async () => {
     try {
         const response = await request({
-            url: 'services',
-            method: 'patch',
+            url: 'categories',
+            method: 'get',
+        });
+
+        if (response) {
+            return response?.data
+        }
+    }
+    catch (e) {
+        console.log('e categories>> ', e)
+    }
+}
+
+export const getMyListingProducts = async (id) => {
+    try {
+        const response = await request({
+            url: `products/user/${id}`,
+            method: 'get',
+        });
+
+        if (response) {
+            return response?.data
+        }
+    }
+    catch (e) {
+        console.log('e my listing products>> ', e)
+    }
+}
+
+export const deleteProduct = async (productId, userId) => {
+    try {
+        const response = await request({
+            url: `products/${productId}`,
+            method: 'delete',
             data: {
-                servicesId: id,
-                ...data
+                id: productId,
             }
         });
 
         if (response) {
-            const services = await getServices()
-            return services;
+            const products = await getMyListingProducts(userId);
+            return products;
         }
     }
     catch (e) {
@@ -106,7 +147,7 @@ export const updateService = async (id, data) => {
     }
 }
 
-export const addService = async (data) => {
+export const addProduct = async (data, images) => {
     try {
         const formData = new FormData();
         const objKeys = Object.keys(data);
@@ -115,10 +156,25 @@ export const addService = async (data) => {
             formData.append(key, data[key]);
         })
 
-        console.log('form dataa >> ', formData)
+        if (images && images.length > 0) {
+            formData.append('ThumbnailImage', {
+                uri: images[0].uri,
+                name: images[0].fileName,
+                type: images[0].type
+            });
+        }
+        images.forEach((img, index) => {
+            if (index !== 0) {
+                formData.append('Images', {
+                    uri: img.uri,
+                    name: img.fileName,
+                    type: img.type
+                });
+            }
+        });
 
         const response = await request({
-            url: 'services',
+            url: 'products',
             method: 'post',
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -127,8 +183,8 @@ export const addService = async (data) => {
         });
 
         if (response) {
-            const services = await getServices()
-            return services;
+            const products = await getProducts()
+            return products;
         }
     }
     catch (e) {
@@ -136,22 +192,84 @@ export const addService = async (data) => {
     }
 }
 
-export const deleteService = async (id) => {
+export const getFavorites = async (userId) => {
     try {
         const response = await request({
-            url: 'services',
-            method: 'delete',
+            url: `users/${userId}/favorites`,
+            method: 'get',
             data: {
-                servicesId: id,
+                userId: userId
             }
         });
 
         if (response) {
-            const services = await getServices()
-            return services;
+            return response?.data
+        }
+    }
+    catch (e) {
+        console.log('e favorites>> ', e)
+    }
+}
+
+export const deleteFavorite = async (userId, productId) => {
+    try {
+        const response = await request({
+            url: `users/${userId}/favorites/${productId}`,
+            method: 'delete',
+            data: {
+                userId: userId,
+                productId: productId
+            }
+        });
+
+        if (response) {
+            const products = await getFavorites(userId);
+            return products;
         }
     }
     catch (e) {
         console.log('e ser>> ', e)
+    }
+}
+
+export const isProductFavorite = async (userId, productId) => {
+    try {
+        const response = await request({
+            url: `users/${userId}/favorites/${productId}`,
+            method: 'get',
+            data: {
+                userId: userId,
+                productId: productId
+            }
+        });
+
+        if (response) {
+            return true;
+        }
+    }
+    catch (e) {
+        console.log('e is favorite>> ', e)
+        return false;
+    }
+}
+
+export const addFavorite = async (userId, productId) => {
+    try {
+        const response = await request({
+            url: `users/${userId}/favorites`,
+            method: 'post',
+            data: {
+                userId: userId,
+                productId: productId
+            }
+        });
+
+        if (response) {
+            const favorites = await getFavorites(userId, productId);
+            return favorites;
+        }
+    }
+    catch (e) {
+        console.log('e add favorite', e)
     }
 }

@@ -3,46 +3,73 @@ import { FlatList, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from './style';
 import Header from "../../../components/Header";
-import { categories } from '../../../data/categories'
 import CategoryItem from "../../../components/CategoryItem";
 import ProductHomeItem from "../../../components/ProductHomeItem"
-import { getServices } from "../../../utility/apiCalls";
-import { ServicesContext } from "../../../../App";
+import { getCategories, getProducts, getUserProfile } from "../../../utility/apiCalls";
+import { CategoryContext, ProductContext, ProfileContext } from "../../../../App";
+import { getItem } from "../../../utility/storageCalls";
+import jwtDecode from "jwt-decode";
+import { useIsFocused } from "@react-navigation/native";
 
 const Home = ({ navigation }) => {
-    const [selectedCategory, setSelectedCategory] = useState();
+    const [selectedCategory, setSelectedCategory] = useState(9);
     const [keyword, setKeyword] = useState();
-    const { services, setServices } = useContext(ServicesContext);
-    const [filteredProducts, setFilteredProducts] = useState(services);
+    const [filteredProducts, setFilteredProducts] = useState(products);
+    const { products, setProducts } = useContext(ProductContext);
+    const { categories, setCategories } = useContext(CategoryContext);
+    const { setProfile } = useContext(ProfileContext);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         (async () => {
-            const data = await getServices();
-            setServices(data);
+            const categoriesData = await getCategories();
+            setCategories(categoriesData);
+            await loadProfile();
         })()
     }, [])
 
     useEffect(() => {
-        if (selectedCategory && !keyword) {
-            const updatedProducts = services.filter((product) => String(product?.category) === String(selectedCategory));
+        (async () => {
+            if (isFocused) {
+                const productsData = await getProducts();
+                setProducts(productsData);
+            }
+        })()
+    }, [isFocused])
+
+    const loadProfile = async () => {
+        const token = await getItem('token');
+        const tokenData = jwtDecode(token);
+        const data = await getUserProfile(tokenData.Id);
+        setProfile(data);
+    }
+
+    useEffect(() => {
+        if (selectedCategory == 9 && !keyword) {
+            setFilteredProducts(products);
+        }
+        else if (selectedCategory == 9 && keyword) {
+            const updatedProducts = products.filter((product) => product?.title?.toLowerCase().includes(keyword.toLowerCase()));
+            setFilteredProducts(updatedProducts);
+        }
+        else if (selectedCategory && !keyword) {
+            const updatedProducts = products.filter((product) => String(product?.categoryId) === String(selectedCategory));
             setFilteredProducts(updatedProducts);
         }
         else if (selectedCategory && keyword) {
-            const updatedProducts = services.filter((product) => String(product?.category) === String(selectedCategory) && product?.title?.toLowerCase().includes(keyword.toLowerCase()));
+            const updatedProducts = products.filter((product) => String(product?.categoryId) === String(selectedCategory) && product?.title?.toLowerCase().includes(keyword.toLowerCase()));
             setFilteredProducts(updatedProducts);
         }
         else if (!selectedCategory && keyword) {
-            const updatedProducts = services.filter((product) => product.title?.toLowerCase().includes(keyword.toLowerCase()));
+            const updatedProducts = products.filter((product) => product.title?.toLowerCase().includes(keyword.toLowerCase()));
             setFilteredProducts(updatedProducts);
         }
-        else if (!selectedCategory && !keyword)
-            setFilteredProducts(services);
-    }, [selectedCategory, keyword, services])
+    }, [selectedCategory, keyword, products])
 
     const renderCategoryItem = ({ item, index }) => {
         return (
             <CategoryItem
-                title={item?.title}
+                name={item?.name}
                 onPress={() => setSelectedCategory(item?.id)}
                 isSelected={item?.id === selectedCategory}
                 image={item?.image}
@@ -78,7 +105,7 @@ const Home = ({ navigation }) => {
                 numColumns={2}
                 data={filteredProducts}
                 renderItem={renderProductItem}
-                keyExtractor={(item) => String(item?._id)}
+                keyExtractor={(item) => String(item?.id)}
                 ListFooterComponent={<View style={{ height: 200 }} />}
             />
         </SafeAreaView>

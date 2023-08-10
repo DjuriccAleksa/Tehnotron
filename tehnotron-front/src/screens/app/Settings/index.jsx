@@ -12,14 +12,14 @@ import { updateProfile } from '../../../utility/apiCalls';
 const Settings = ({ navigation }) => {
     const [editing, setEditing] = useState(false);
     const { profile, setProfile } = useContext(ProfileContext);
-    const [values, setValues] = useState({ _id: profile?.id, fullName: profile?.fullName, email: profile?.email });
+    const [values, setValues] = useState({ userId: profile?.id, fullName: profile?.fullname, email: profile?.email });
 
     const onEditPress = () => {
         setEditing(true);
     }
 
     const onSave = async () => {
-        const updatedProfile = await updateProfile(values);
+        const updatedProfile = await updateProfile(profile?.id, values);
         setProfile(updatedProfile);
         setEditing(false);
     }

@@ -1,0 +1,195 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Services.Contracts\\Tehnotron.Services.Contracts.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Entities\\Tehnotron.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Entities\\Tehnotron.Entities.csproj",
+        "projectName": "Tehnotron.Entities",
+        "projectPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Entities\\Tehnotron.Entities.csproj",
+        "packagesPath": "C:\\Users\\aleksa.djuric\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\aleksa.djuric\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Services.Contracts\\Tehnotron.Services.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Services.Contracts\\Tehnotron.Services.Contracts.csproj",
+        "projectName": "Tehnotron.Services.Contracts",
+        "projectPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Services.Contracts\\Tehnotron.Services.Contracts.csproj",
+        "packagesPath": "C:\\Users\\aleksa.djuric\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Services.Contracts\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\aleksa.djuric\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Entities\\Tehnotron.Entities.csproj": {
+                "projectPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Entities\\Tehnotron.Entities.csproj"
+              },
+              "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Shared\\Tehnotron.Shared.csproj": {
+                "projectPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Shared\\Tehnotron.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Shared\\Tehnotron.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Shared\\Tehnotron.Shared.csproj",
+        "projectName": "Tehnotron.Shared",
+        "projectPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Shared\\Tehnotron.Shared.csproj",
+        "packagesPath": "C:\\Users\\aleksa.djuric\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\aleksa.djuric\\Desktop\\Tehnotron\\tehnotron-back\\Tehnotron.API\\Tehnotron.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\aleksa.djuric\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

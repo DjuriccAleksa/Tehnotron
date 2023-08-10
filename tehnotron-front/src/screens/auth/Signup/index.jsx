@@ -12,7 +12,13 @@ import { signUp } from '../../../utility/apiCalls';
 
 const Signup = ({ navigation }) => {
   const [checked, setChecked] = useState(false);
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    Fullname: '',
+    UserName: '',
+    Email: '',
+    Password: '',
+    PhoneNumber: ''
+  });
 
   const onSignin = () => {
     navigation.navigate('Signin');
@@ -28,13 +34,8 @@ const Signup = ({ navigation }) => {
 
   const onSubmit = async () => {
     try {
-      if (!values?.fullName || !values?.email || !values?.password || !values?.confirmPassword) {
-        Alert.alert('All fields are required');
-        return;
-      }
-
-      if (values?.password !== values.confirmPassword) {
-        Alert.alert('Passwords do not match');
+      if (!values?.Fullname || !values?.Email || !values?.Password || !values?.UserName) {
+        Alert.alert('All fields expected phone number are required');
         return;
       }
 
@@ -58,10 +59,11 @@ const Signup = ({ navigation }) => {
       <ScrollView style={styles.container}>
         <AuthHeader onBackPress={onBack} title={"Sign Up"} />
 
-        <Input value={values.fullName} onChangeText={(v) => onChange('fullName', v)} label="Name" placeholder="John Doe" containerMargin={{ marginBottom: 20 }} />
-        <Input value={values.email} onChangeText={(v) => onChange('email', v)} label="Email" placeholder="email@gmail.com" containerMargin={{ marginBottom: 20 }} />
-        <Input value={values.password} onChangeText={(v) => onChange('password', v)} label="Password" placeholder="*****" isPassword containerMargin={{ marginBottom: 20 }} />
-        <Input value={values.confirmPassword} onChangeText={(v) => onChange('confirmPassword', v)} label="Confirm Password" placeholder="*****" isPassword containerMargin={{ marginBottom: 20 }} />
+        <Input name="Fullname" value={values.Fullname} onEndEditing={onChange} label="Name and surname" placeholder="John Doe" containerMargin={{ marginBottom: 20 }} />
+        <Input name="UserName" value={values.UserName} onEndEditing={onChange} label="Username" placeholder="JohnDoe10" containerMargin={{ marginBottom: 20 }} />
+        <Input name="Email" value={values.Email} onEndEditing={onChange} label="Email" placeholder="email@gmail.com" containerMargin={{ marginBottom: 20 }} />
+        <Input name="Password" value={values.Password} onEndEditing={onChange} label="Password" placeholder="*****" isPassword containerMargin={{ marginBottom: 20 }} />
+        <Input name="PhoneNumber" value={values.PhoneNumber} onEndEditing={onChange} label="Phone number" placeholder="+3816.." containerMargin={{ marginBottom: 20 }} />
 
         <View style={styles.agreeTerms}>
           <Checkbox checked={checked} onCheck={setChecked} />
@@ -70,9 +72,9 @@ const Signup = ({ navigation }) => {
 
         <Button onPress={onSubmit} style={styles.button} title="Sign Up" />
 
-        <Separator text="Or sign up with" />
+        {/* <Separator text="Or sign up with" /> */}
 
-        <GoogleLogin />
+        {/* <GoogleLogin /> */}
 
         <Text style={styles.footerText}>Already have an acoount?
           <Text style={styles.footerTextLink} onPress={onSignin}> Sign in</Text>

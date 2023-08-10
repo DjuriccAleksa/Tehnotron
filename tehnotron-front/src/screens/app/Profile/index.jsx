@@ -1,26 +1,25 @@
 import React, { useContext, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { styles } from './style';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../../components/Header';
 import ListItem from '../../../components/ListItem';
 import Button from '../../../components/Button';
-import { getUserProfile } from '../../../utility/apiCalls';
-import { ProfileContext } from '../../../../App';
+import { ProfileContext, UserContext } from '../../../../App';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Profile = ({ navigation }) => {
-    const num = 10;
     const { profile, setProfile } = useContext(ProfileContext);
-
-    useEffect(() => {
-        (async () => {
-            const data = await getUserProfile();
-            setProfile(data);
-        })()
-    }, [])
+    const { user, setUser } = useContext(UserContext);
 
     const onLogout = () => {
-        console.log('log out clicked');
+        const onRemove = () => {
+            setUser({});
+        }
+
+        AsyncStorage.removeItem('token');
+        Alert.alert("You will be logged out.", 'Are you sure you want to continue?', [{ text: 'Yes', onPress: onRemove }, { text: 'Cancel' }]);
     }
 
     const onSettingsPress = () => {
@@ -40,10 +39,11 @@ const Profile = ({ navigation }) => {
             <Header title="Profile" showLogout onLogout={onLogout} />
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Text style={styles.name}>{profile?.fullName}</Text>
+                    <Text style={styles.name}>{profile?.fullname}</Text>
+                    <Text style={styles.username}>{profile?.userName}</Text>
                     <Text style={styles.email}>{profile?.email}</Text>
 
-                    <ListItem onPress={onMyListingsPress} title="My Listings" subtitle={`You have ${num} listings`} />
+                    <ListItem onPress={onMyListingsPress} title="My Listings" subtitle={`All your published products`} />
                     <ListItem onPress={onSettingsPress} title="Settings" subtitle="Account, FAQ, Contact" />
                 </View>
 

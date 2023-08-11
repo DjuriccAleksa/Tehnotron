@@ -17,7 +17,6 @@ const Stack = createNativeStackNavigator();
 const Routes = () => {
     const { user, setUser } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         (async () => {
             // const token = await AsyncStorage.getItem('auth_token');
@@ -37,8 +36,10 @@ const Routes = () => {
     }, [])
 
     useEffect(() => {
+
         if (user?.token) {
             addToxenToRequest(user?.token);
+
         }
     }, [user])
 

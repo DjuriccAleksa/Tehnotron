@@ -7,6 +7,7 @@ import ListItem from '../../../components/ListItem';
 import Button from '../../../components/Button';
 import { ProfileContext, UserContext } from '../../../../App';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { removeTokenOnLogout } from '../../../utility/request';
 
 
 const Profile = ({ navigation }) => {
@@ -16,9 +17,10 @@ const Profile = ({ navigation }) => {
     const onLogout = () => {
         const onRemove = () => {
             setUser({});
+            removeTokenOnLogout();
+            AsyncStorage.removeItem('token');
         }
 
-        AsyncStorage.removeItem('token');
         Alert.alert("You will be logged out.", 'Are you sure you want to continue?', [{ text: 'Yes', onPress: onRemove }, { text: 'Cancel' }]);
     }
 

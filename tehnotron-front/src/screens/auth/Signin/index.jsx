@@ -9,6 +9,7 @@ import GoogleLogin from '../../../components/GoogleLogin';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { UserContext } from '../../../../App';
 import { signIn } from '../../../utility/apiCalls';
+import { addToxenToRequest } from '../../../utility/request';
 
 const Signin = ({ navigation }) => {
   const [values, setValues] = useState({ UserName: '', Password: '' });
@@ -39,6 +40,7 @@ const Signin = ({ navigation }) => {
       }
 
       const token = await signIn(values);
+      addToxenToRequest(token);
       setUser({ token });
     } catch (e) {
       console.log('e >>', e)

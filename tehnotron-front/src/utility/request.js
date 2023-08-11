@@ -15,3 +15,7 @@ export const request = ({ url, method, data, headers }) => {
 export const addToxenToRequest = (token) => {
     axios.defaults.headers.Authorization = `Bearer ${token}`;
 }
+
+export const removeTokenOnLogout = () => {
+    delete axios.defaults.headers.Authorization;
+}

@@ -30,6 +30,7 @@ const Home = ({ navigation }) => {
 
     useEffect(() => {
         (async () => {
+
             if (isFocused) {
                 const productsData = await getProducts();
                 setProducts(productsData);

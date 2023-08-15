@@ -35,6 +35,7 @@ export const signIn = async (values) => {
         }
     }
     catch (e) {
+        console.log('erorr in login', e)
         Alert.alert("Wrong Username or Password");
     }
 }

@@ -68,40 +68,39 @@ const CreateListing = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView>
+
+        <SafeAreaView style={{ flex: 1 }}>
             <Header showBack={true} onBackPress={goBack} title="Create a new listing" />
 
             <ScrollView style={styles.container}  >
-                <KeyboardAvoidingView behavior='position'>
-                    <Text style={styles.sectionTitle}>Upload Photos</Text>
+                <Text style={styles.sectionTitle}>Upload Photos</Text>
 
-                    <View style={styles.imageRow}>
-                        <TouchableOpacity disabled={loading} style={styles.uploadContainer} onPress={uploadNewImage}>
-                            <View style={styles.uploadCircle}>
-                                <Text style={styles.uploadPlus}>+</Text>
-                            </View>
-                        </TouchableOpacity>
+                <View style={styles.imageRow}>
+                    <TouchableOpacity disabled={loading} style={styles.uploadContainer} onPress={uploadNewImage}>
+                        <View style={styles.uploadCircle}>
+                            <Text style={styles.uploadPlus}>+</Text>
+                        </View>
+                    </TouchableOpacity>
 
-                        {images?.map(image => (
-                            <View style={styles.imageCont} key={image?.fileName}>
-                                <Image style={styles.image} source={{ uri: image?.uri }} />
-                                <Pressable hitSlop={20} onPress={() => onDeleteImage(image)}>
-                                    <Image style={styles.delete} source={require('../../../resources/remove_image.png')} />
-                                </Pressable>
-                            </View>
-                        ))}
+                    {images?.map(image => (
+                        <View style={styles.imageCont} key={image?.fileName}>
+                            <Image style={styles.image} source={{ uri: image?.uri }} />
+                            <Pressable hitSlop={20} onPress={() => onDeleteImage(image)}>
+                                <Image style={styles.delete} source={require('../../../resources/remove_image.png')} />
+                            </Pressable>
+                        </View>
+                    ))}
 
-                        {loading ? (
-                            <ActivityIndicator />
-                        ) : null}
-                    </View>
+                    {loading ? (
+                        <ActivityIndicator />
+                    ) : null}
+                </View>
 
-                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Listing Title" label="Title" name="Title" value={values.Title} onEndEditing={onChange} />
-                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Select the category" label="Category" name="CategoryId" value={values.CategoryId} onChangeText={(v) => onChange('CategoryId', v)} type="picker" options={categories} />
-                    <Input containerMargin={{ marginBottom: 20 }} placeholder="Enter price in RSD" label="Price" name="Price" value={values.Price} onEndEditing={onChange} keyboardType="numeric" />
-                    <Input containerMargin={{ marginBottom: 20 }} style={styles.textarea} placeholder="Tell us more..." label="Description" name="Description" value={values.Description} onEndEditing={onChange} multiline />
+                <Input containerMargin={{ marginBottom: 20 }} placeholder="Listing Title" label="Title" name="Title" value={values.Title} onEndEditing={onChange} />
+                <Input containerMargin={{ marginBottom: 20 }} placeholder="Select the category" label="Category" name="CategoryId" value={values.CategoryId} onChangeText={(v) => onChange('CategoryId', v)} type="picker" options={categories} />
+                <Input containerMargin={{ marginBottom: 20 }} placeholder="Enter price in RSD" label="Price" name="Price" value={values.Price} onEndEditing={onChange} keyboardType="numeric" />
+                <Input containerMargin={{ marginBottom: 20 }} style={styles.textarea} placeholder="Tell us more..." label="Description" name="Description" value={values.Description} onEndEditing={onChange} multiline />
 
-                </KeyboardAvoidingView>
                 <Button onPress={onSubmit} title="Submit" style={styles.button} />
             </ScrollView>
         </SafeAreaView>

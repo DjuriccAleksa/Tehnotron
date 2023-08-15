@@ -89,26 +89,29 @@ const Home = ({ navigation }) => {
         )
     }
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.homeContainer} >
             <Header showSearch onSearch={setKeyword} keyword={keyword} title="Find All You Need" />
 
-            <FlatList
-                showsHorizontalScrollIndicator={false}
-                style={styles.categoriesList}
-                horizontal
-                data={categories}
-                renderItem={renderCategoryItem}
-                keyExtractor={(item, index) => String(index)}
-            />
+            <View style={styles.categoriesList}>
+                <FlatList
+                    showsHorizontalScrollIndicator={false}
 
+                    horizontal
+                    data={categories}
+                    renderItem={renderCategoryItem}
+                    keyExtractor={(item, index) => String(index)}
+                />
+            </View>
             <FlatList
                 style={styles.productList}
                 numColumns={2}
                 data={filteredProducts}
                 renderItem={renderProductItem}
                 keyExtractor={(item) => String(item?.id)}
-                ListFooterComponent={<View style={{ height: 200 }} />}
+                ListFootrComponent={<View style={{ height: 100 }} />}
+                ListEmptyComponent={(<Text style={{ textAlign: 'center', marginTop: 40 }}>There is no available products for this category.</Text>)}
             />
+
         </SafeAreaView>
     )
 }

@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Tehnotron.Shared.DTOs
 {
-    public record UserDTO(int Id, string Fullname, string UserName, string Email);
+    public record UserDTO(int Id, string Fullname, string UserName, string Email, string PhoneNumber);
 }

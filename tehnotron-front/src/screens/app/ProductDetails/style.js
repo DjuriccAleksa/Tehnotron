@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
         padding: 24,
         flexDirection: 'row',
         alignItems: 'center',
+
     },
     container: {
     },
@@ -41,13 +42,13 @@ export const styles = StyleSheet.create({
         fontWeight: '300',
         marginVertical: 8,
     },
-    bookmarkContainer: {
+    bookmarkPhoneContainer: {
         backgroundColor: colors.lightGrey,
         padding: 18,
         borderRadius: 8,
-        marginRight: 16,
+        marginHorizontal: 12,
     },
-    bookmarkIcon: {
+    bookmarkPhoneIcon: {
         width: 24,
         height: 24,
     },

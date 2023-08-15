@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Tehnotron.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://*:5230");
+
 
 // Add services to the container.
 

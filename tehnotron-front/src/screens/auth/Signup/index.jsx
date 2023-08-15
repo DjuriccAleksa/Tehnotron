@@ -5,9 +5,7 @@ import { View, Text, ScrollView, Alert } from 'react-native';
 import Input from '../../../components/Input';
 import Checkbox from '../../../components/Checkbox';
 import Button from '../../../components/Button'
-import Separator from '../../../components/Separator';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GoogleLogin from '../../../components/GoogleLogin';
 import { signUp } from '../../../utility/apiCalls';
 
 const Signup = ({ navigation }) => {
@@ -71,10 +69,6 @@ const Signup = ({ navigation }) => {
         </View>
 
         <Button onPress={onSubmit} style={styles.button} title="Sign Up" />
-
-        {/* <Separator text="Or sign up with" /> */}
-
-        {/* <GoogleLogin /> */}
 
         <Text style={styles.footerText}>Already have an acoount?
           <Text style={styles.footerTextLink} onPress={onSignin}> Sign in</Text>

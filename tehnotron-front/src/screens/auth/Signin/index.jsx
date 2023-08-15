@@ -4,8 +4,6 @@ import AuthHeader from '../../../components/AuthHeader';
 import { Text, ScrollView, Alert, TextInput } from 'react-native';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button'
-import Separator from '../../../components/Separator';
-import GoogleLogin from '../../../components/GoogleLogin';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { UserContext } from '../../../../App';
 import { signIn } from '../../../utility/apiCalls';
@@ -14,7 +12,6 @@ import { addToxenToRequest } from '../../../utility/request';
 const Signin = ({ navigation }) => {
   const [values, setValues] = useState({ UserName: '', Password: '' });
   const { setUser } = useContext(UserContext);
-  console.log(values);
   const onSignUp = () => {
     navigation.navigate('Signup');
   }
@@ -57,9 +54,6 @@ const Signin = ({ navigation }) => {
 
         <Button onPress={onSubimt} style={styles.button} title="Sign In" />
 
-        <Separator text="Or sign in with" />
-
-        <GoogleLogin />
 
         <Text style={styles.footerText}>Don't have an acoount?
           <Text style={styles.footerTextLink} onPress={onSignUp}> Sign Up</Text>

@@ -20,13 +20,15 @@ namespace Tehnotron.Repository
 
         public void DeleteProduct(Product product) =>  Delete(product);
 
-        public async Task<IEnumerable<Product>> GetAllProducts() => await 
-            GetAll().
-            OrderBy(p => p.CategoryId).
-            ToListAsync();
+        public async Task<IEnumerable<Product>> GetAllProducts() => await
+            GetAll()
+            .Include(p => p.User)
+            .OrderBy(p => p.CategoryId)
+            .ToListAsync();
 
         public async Task<IEnumerable<Product>> GetAllProductsForUser(int id) => await 
             GetByCondition(p => p.UserId == id)
+            .Include(p => p.User)
             .OrderBy(p => p.Title)
             .ToListAsync();
 

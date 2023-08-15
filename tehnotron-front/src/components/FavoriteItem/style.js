@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         height: 100,
         borderRadius: 10,
         marginRight: 20,
-        backgroundColor: colors.lightGrey
+        resizeMode: 'contain'
 
     },
     price: {

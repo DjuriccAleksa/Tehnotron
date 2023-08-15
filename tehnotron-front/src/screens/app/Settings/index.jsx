@@ -28,8 +28,16 @@ const Settings = ({ navigation }) => {
         setValues(v => ({ ...v, [key]: value }))
     }
 
-    const onItemPress = () => {
-        Linking.openURL('https://google.com');
+    const onItemPressAboutUs = () => {
+        Linking.openURL('https://github.com/DjuriccAleksa');
+    }
+
+    const onItemPressContactUs = () => {
+        Linking.openURL('mailto: djuric258@gmail.com');
+    }
+
+    const onItemPressPrivacyTerms = () => {
+        Linking.openURL('https://policies.google.com/?hl=en-US');
     }
 
     const goBack = () => {
@@ -54,9 +62,9 @@ const Settings = ({ navigation }) => {
                 ) : null}
 
                 <Text style={[styles.sectionTitle, { marginTop: 40 }]}>Help Center</Text>
-                <ListItem onPress={onItemPress} style={styles.item} title="FAQ" />
-                <ListItem onPress={onItemPress} style={styles.item} title="Contact Us" />
-                <ListItem onPress={onItemPress} style={styles.item} title="Privacy & Terms" />
+                <ListItem onPress={onItemPressAboutUs} style={styles.item} title="About us" />
+                <ListItem onPress={onItemPressContactUs} style={styles.item} title="Contact Us" />
+                <ListItem onPress={onItemPressPrivacyTerms} style={styles.item} title="Privacy & Terms" />
             </ScrollView>
         </SafeAreaView>
     )

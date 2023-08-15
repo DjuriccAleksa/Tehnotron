@@ -5,7 +5,7 @@ Tehnotron is a mobile marketplace for technology enthusiasts built on React Nati
 ### Frontend
 **React Native**: A renowned cross-platform mobile application development framework allowing for the creation of native and high-performance user interfaces tailored for Android devices.
 ### Backend
-**ASP.NET Core**: A robust framework for building high-performance web applications, combined with **Entity Framework Core** as its ORM and enhanced security using the **Identity Framework**.
+**ASP.NET Core**: A robust framework for building high-performance web applications, combined with **Entity Framework Core** as its ORM and enhanced security using the **Identity Framework**. Images are managed and stored using **Cloudinary SaaS**.
 ### Database
 **SQL Server**: A leading relational database management system chosen for its scalability, performance, and security capabilities.
 
